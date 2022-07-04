@@ -1,2 +1,11 @@
 :q
+:l src/Toy.hs
+:l src/Toy.hs
+:l src/Toy.hs
+:q
+:load src/Toy.hs
+:load src/Toy.hs
+:load src/Toy.hs
+load src/Toy.hs
+:q
 :l

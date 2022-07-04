@@ -9,9 +9,14 @@ drive :: Interactive -> (String -> String)
 drive f = unlines . f . lines
 
 toy :: SoruceCode -> Interactive
-toy prog inputs = map output . eval . initState prog inputs))
+toy prog inputs = map output . eval . initState prog inputs
 
-type Memory = ()
+type Label  = String
+type Memory = [(Label, Contact)]
+
+data Content
+     = Code Code
+     | Data Int
 
 load :: SourceCode -> Memory
 load = undefined
@@ -20,9 +25,13 @@ initState :: Memory -> ([Input] -> ToyState)
 initState mem inputs = undefined
 
 output :: Toystate -> Output
-output state = undefined
+output state = case state of
+    (_, _, _, _, output) -> output
 
-type Toystate = ()
+type Toystate = (Final, Memory, Acc, [Input], Output)
+
+type Final = Bool
+type Acc   = Int
 
 eval :: ToyState -> [ToyState]
 eval state = state: rests
@@ -31,7 +40,7 @@ eval state = state: rests
               | otherwise     = eval [step state]
 
 isFinal :: Toystate -> Bool
-isFinal state = undefined
+isFinal (f, _, _, _, _) = f
 
 step :: ToyState -> ToyState
 step state = execute (decode(fetch state)) state
@@ -43,9 +52,8 @@ fetch state = undefined
 
 type Instruction = Toystate -> ToyState
 
-decode :: Code -> ToyState -> ToyState)
+decode :: Code -> ToyState -> ToyState
 decode code = undefined
 
 execete :: Instruction -> ToyState -> ToyState
 execute cmd state = cmd state
-
